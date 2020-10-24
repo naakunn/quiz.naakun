@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- <link rel="stylesheet" href="css/normalize.css" /> -->
+  <!-- <link rel="stylesheet" href="css/main.css" /> -->
+
+  <meta name="theme-color" content="#fafafa" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div id="js-question" class="mt-5  alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="ml-1 btn btn-primary">Primary</button>
+        <button type="button" class="ml-1 btn btn-primary">Primary</button>
+        <button type="button" class="ml-1 btn btn-primary">Primary</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const quiz = [{
+        question: "次のうち漢字が違う人は誰でしょう？",
+        answers: [
+          "冨岡義勇",
+          "胡蝶カナヲ",
+          "神崎アオイ",
+          "嘴平伊之助",
+        ],
+        correct: "胡蝶カナヲ"
+      },
+      {
+        question: "嘴平伊之助のお母さんの名前は？",
+        answers: [
+          "しのぶ",
+          "須磨",
+          "琴葉",
+          "瑠火",
+        ],
+        correct: "琴葉"
+      },
+      {
+        question: "炭治郎の兄弟の数は？(炭治郎含む)",
+        answers: [
+          "6人",
+          "7人",
+          "3人",
+          "4人",
+        ],
+        correct: "6人"
+      },
+      {
+        question: "冨岡義勇さんの好物は？",
+        answers: [
+          "鮭大根",
+          "みたらし団子",
+          "さつまいもの味噌汁",
+          "ふろふき大根",
+        ],
+        correct: "鮭大根"
+      },
+      {
+        question: "鬼が嫌う花の名前は？",
+        answers: [
+          "彼岸花",
+          "胡蝶蘭",
+          "藤",
+          "百合",
+        ],
+        correct: "藤"
+      }
+    ];
+
+    const quizLength = quiz.length;
+    let quizIndex = 0;
+    let score = 0;
+
+    const $button = document.getElementsByTagName('button');
+    const buttonLength = $button.length;
+
+    //クイズの問題文、選択肢を定義
+    const setupQuiz = () => {
+      document.getElementById('js-question').textContent = quiz[quizIndex].question;
+      let buttonIndex = 0;
+
+      while (buttonIndex < buttonLength) {
+        $button[buttonIndex].textContent = quiz[quizIndex].answers[buttonIndex];
+        buttonIndex++;
+      }
+    };
+    setupQuiz();
+
+    const clickHandlar = (e) => {
+      if (quiz[quizIndex].correct === e.target.textContent) {
+        alert("正解！");
+        score++;
+      } else {
+        alert("不正解！");
+      }
+
+      quizIndex++;
+
+      if (quizIndex < quizLength) {
+        //問題数がまだあればこれを実行
+        setupQuiz();
+      } else {
+        //問題数がもうなければこれを実行
+        alert("終了！あなたの正解数は" + score + "/" + quizLength + "です！");
+      }
+    };
+
+    let handlarIndex = 0;
+    while (handlarIndex < buttonLength) {
+      $button[handlarIndex].addEventListener('click', (e) => {
+        clickHandlar(e);
+      });
+      handlarIndex++;
+    }
+  </script>
+</body>
+
+</html>
